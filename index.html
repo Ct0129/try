@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東明研 TMLab 討論預約系統</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f4f4f7;
+        }
+        /* 微調滾動條 */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-[#1c1c1e] py-8 px-4 flex flex-col justify-between">
+
+    <main class="max-w-5xl w-full mx-auto space-y-6">
+        
+        <!-- 系統公告區塊 (完美融入 00.12.38.png 的 UFO 黃光與 Well Done 極簡美學) -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 sm:p-8 space-y-6 flex flex-col items-center text-center relative overflow-hidden">
+            
+            <!-- 🪐 UFO 黃光極簡 SVG 插圖 (100% 複刻 截圖 2026-06-02 00.28.09.png 風格，且格子改為月曆日期) -->
+            <div class="relative w-48 h-40 flex items-center justify-center">
+                <!-- 霓虹黃光擴散背景 -->
+                <div class="absolute w-32 h-32 rounded-full bg-amber-400/10 blur-2xl animate-pulse"></div>
+                <!-- 極簡 UFO 線條、黃光與月曆網格 -->
+                <svg class="w-40 h-40 z-10 drop-shadow-xl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 定義黃色金光與漸層 -->
+                    <defs>
+                        <linearGradient id="ufoYellowBeam" x1="50" y1="20" x2="50" y2="95" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#FFDF00" stop-opacity="0.95"/>
+                            <stop offset="40%" stop-color="#FFEB60" stop-opacity="0.5"/>
+                            <stop offset="100%" stop-color="#FFEB60" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- 下照金黃光束 -->
+                    <polygon points="50,22 15,95 85,95" fill="url(#ufoYellowBeam)" />
+
+                    <!-- 第一排月曆格 (上層：較小，帶有半透明月曆感) -->
+                    <!-- 左日曆 -->
+                    <rect x="41" y="32" width="7" height="7" rx="1.2" fill="#E2B900" opacity="0.3" />
+                    <rect x="41" y="32" width="7" height="1.8" fill="#C59B00" opacity="0.4" />
+                    <!-- 右日曆 -->
+                    <rect x="52" y="32" width="7" height="7" rx="1.2" fill="#E2B900" opacity="0.3" />
+                    <rect x="52" y="32" width="7" height="1.8" fill="#C59B00" opacity="0.4" />
+
+                    <!-- 第二排月曆格 (中層：中間高亮日期為 4) -->
+                    <!-- 左日曆 -->
+                    <rect x="28" y="49" width="10" height="10" rx="1.5" fill="#E2B900" opacity="0.4" />
+                    <rect x="28" y="49" width="10" height="2.5" fill="#C59B00" opacity="0.5" />
+                    <circle cx="31" cy="54" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="33" cy="54" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="35" cy="54" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="31" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="33" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="35" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
+
+                    <!-- 正中間的黃金月曆卡：上面印著清楚的日期 4 (週四代表預約日) -->
+                    <rect x="44" y="46" width="12" height="12" rx="2" fill="#F4CA00" opacity="0.95" />
+                    <!-- 日曆頂部裝飾條與吊孔 -->
+                    <rect x="44" y="46" width="12" height="3" rx="0.8" fill="#D97706" opacity="0.9" />
+                    <circle cx="47" cy="47.5" r="0.4" fill="#FFFFFF" />
+                    <circle cx="53" cy="47.5" r="0.4" fill="#FFFFFF" />
+                    <!-- 核心日期文字「4」 -->
+                    <text x="50" y="55" fill="#1C1C1E" font-size="7" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" text-anchor="middle">4</text>
+
+                    <!-- 右日曆 -->
+                    <rect x="62" y="49" width="10" height="10" rx="1.5" fill="#E2B900" opacity="0.4" />
+                    <rect x="62" y="49" width="10" height="2.5" fill="#C59B00" opacity="0.5" />
+                    <circle cx="65" cy="54" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="67" cy="54" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="69" cy="54" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="65" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="67" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
+                    <circle cx="69" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
+
+                    <!-- 第三排月曆格 (底層：較大且淡雅) -->
+                    <!-- 1 -->
+                    <rect x="16" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
+                    <rect x="16" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
+                    <!-- 2 -->
+                    <rect x="33" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
+                    <rect x="33" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
+                    <!-- 3 -->
+                    <rect x="55" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
+                    <rect x="55" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
+                    <!-- 4 -->
+                    <rect x="72" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
+                    <rect x="72" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
+
+                    <!-- 斜向 UFO Saucer 飛碟主體 (100% 複刻 00.28.09 Tilted Blue/Black Style) -->
+                    <g transform="translate(42, 10) rotate(-22)">
+                        <!-- 黑色圓頂艙蓋 (Black Dome) -->
+                        <path d="M8,4 C11,4 15,7 15,10 L1,10 C1,7 5,4 8,4 Z" fill="#1A1A1A" />
+                        <!-- 亮藍色飛碟盤 (Electric Blue Saucer) -->
+                        <ellipse cx="8" cy="11" rx="14" ry="4.5" fill="#0066FF" />
+                        <!-- 亮白色射線底盤 (Glowing White Bottom Light) -->
+                        <ellipse cx="8" cy="12.5" rx="7" ry="1.8" fill="#FFFFFF" />
+                    </g>
+                </svg>
+            </div>
+
+            <div class="space-y-3 max-w-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-center gap-3">
+                    <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center justify-center gap-1.5">
+                        東明研 TMLab 討論預約系統
+                    </h1>
+                </div>
+                <div class="flex justify-center">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500 border border-slate-200">
+                        老師編輯模式：關閉
+                    </span>
+                </div>
+                
+                <div class="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium space-y-2 text-justify sm:text-center px-4">
+                    <p>
+                        <span class="font-bold text-slate-900">固定開放：</span>週一 / 週四（16:00 後）• 國定假日不開放 • 填寫後即預約成功 • 預設地點：3F 研究室 • 表單日期僅列出「今日起」30天內可預約日（可跨月）
+                    </p>
+                    <p class="text-slate-400">
+                        週一與週四以外時間請私訊老師確認是否額外開放，碩一以上要提報（口考）的同學，請自行注意討論的次數與研究進度。後台會紀錄所有填寫內容，請勿刪除其他同學的預約。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主體二欄版面 (左側填表預約，右側月曆與動態行程表) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            
+            <!-- 左側預約表單 -->
+            <div class="md:col-span-5 space-y-5">
+                
+                <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 space-y-5">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h2 class="text-base font-extrabold text-slate-900">填表預約</h2>
+                        <!-- 複刻 IMG_2209.jpg 的預約說明 -->
+                        <p class="text-[11px] text-slate-400 font-medium leading-relaxed mt-1.5">
+                            最晚請於預約日前一天 21:00 完成填寫。若要改日期、時段或耗時，請先在右側行事曆明細刪除原預約，再於此重新填寫（不提供線上修改）。
+                        </p>
+                    </div>
+
+                    <form id="bookingForm" class="space-y-4.5" onsubmit="handleFormSubmit(event)">
+                        
+                        <!-- 姓名分組下拉選單 -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">姓名 Select Person <span class="text-rose-500">*</span></label>
+                            <select id="studentSelect" required
+                                class="w-full px-4 py-3 bg-[#f8fafc] border border-slate-100 rounded-2xl text-slate-800 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/5 transition-all text-xs font-semibold appearance-none">
+                                <option value="" disabled selected>請選擇姓名...</option>
+                                <optgroup label="碩一" class="font-bold text-slate-400">
+                                    <option value="趙怡潔" class="text-slate-800">趙怡潔 (碩一)</option>
+                                    <option value="趙宜潔" class="text-slate-800">趙宜潔 (碩一)</option>
+                                </optgroup>
+                                <optgroup label="碩二" class="font-bold text-slate-400">
+                                    <option value="兆儀節" class="text-slate-800">兆儀節 (碩二)</option>
+                                    <option value="趙怡捷" class="text-slate-800">趙怡捷 (碩二)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <!-- 預約日期 (下拉式選單，動態過濾週一與週四) -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">日期 Date <span class="text-rose-500">*</span></label>
+                            <select id="bookingDate" required onchange="syncCalendarSelection(this.value)"
+                                class="w-full px-4 py-3 bg-[#f8fafc] border border-slate-100 rounded-2xl text-slate-800 font-semibold focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/5 transition-all text-xs appearance-none">
+                                <!-- 由 JS 動態填充當前月份可供預約的週一與週四 -->
+                            </select>
+                        </div>
+
+                        <!-- 預約起始時段 (18, 19, 20 三個時段) -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">時段 Select Time <span class="text-rose-500">*</span></label>
+                            <div class="space-y-2">
+                                <button type="button" id="slot18" onclick="selectSlot('18')"
+                                    class="time-slot w-full text-left px-4 py-3 rounded-2xl border border-slate-100 bg-[#f8fafc] text-slate-700 flex justify-between items-center transition-all hover:bg-slate-50">
+                                    <span class="font-bold text-xs">18:00 - 19:00</span>
+                                    <span id="slot18Badge" class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-[#E6F4EA] text-[#137333]">剩餘 60 分鐘</span>
+                                </button>
+                                <button type="button" id="slot19" onclick="selectSlot('19')"
+                                    class="time-slot w-full text-left px-4 py-3 rounded-2xl border border-slate-100 bg-[#f8fafc] text-slate-700 flex justify-between items-center transition-all hover:bg-slate-50">
+                                    <span class="font-bold text-xs">19:00 - 20:00</span>
+                                    <span id="slot19Badge" class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-slate-50 text-slate-400">剩餘 20 分鐘</span>
+                                </button>
+                                <button type="button" id="slot20" onclick="selectSlot('20')"
+                                    class="time-slot w-full text-left px-4 py-3 rounded-2xl border border-slate-100 bg-[#f8fafc] text-slate-700 flex justify-between items-center transition-all hover:bg-slate-50">
+                                    <span class="font-bold text-xs">20:00 - 21:00</span>
+                                    <span id="slot20Badge" class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-[#E6F4EA] text-[#137333]">剩餘 60 分鐘</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 耗時 -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">耗時 Duration</label>
+                            <select id="durationSelect"
+                                class="w-full px-3 py-2.5 bg-[#f8fafc] border border-[#f1f5f9] rounded-xl text-slate-800 font-bold focus:outline-none text-xs">
+                                <option value="20">20 分鐘</option>
+                                <option value="30">30 分鐘</option>
+                                <option value="40">40 分鐘</option>
+                                <option value="60">60 分鐘</option>
+                                <option value="90">90 分鐘</option>
+                                <option value="120">120 分鐘</option>
+                            </select>
+                        </div>
+
+                        <!-- 討論內容 (100% 複刻 截圖 2026-06-02 00.01.15.png，完美加大間距與邊界安全感) -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-800 mb-2.5">討論內容（可複選）</label>
+                            <div id="topicsContainer" class="flex flex-wrap gap-2.5 max-w-full p-0.5 overflow-hidden">
+                                <!-- 由 JS 動態生成並管理狀態 -->
+                            </div>
+                        </div>
+
+                        <!-- 備註備用輸入框 -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">備註 NOTE</label>
+                            <input type="text" id="noteInput" placeholder="例：報paper、口考準備 (選填)"
+                                class="w-full px-4 py-3.5 bg-[#f8fafc] border border-slate-100 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-500 text-xs font-semibold">
+                        </div>
+
+                        <!-- 警告提示區塊：完美對接 截圖 2026-06-02 00.01.34.png，與送出按鈕維持呼吸間距 -->
+                        <div id="alertBox" class="hidden p-3.5 rounded-xl border text-[11px] leading-relaxed font-bold transition-all duration-150 my-4 shadow-xs"></div>
+
+                        <!-- 送出按鈕 -->
+                        <button type="submit"
+                            class="w-full py-4 bg-black hover:bg-slate-900 text-white font-black rounded-2xl shadow-xs transform active:scale-[0.98] transition-all text-xs tracking-wider uppercase mt-2">
+                            送出預約
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 右側板塊：月曆與動態行程 -->
+            <div class="md:col-span-7 space-y-6">
+                
+                <!-- 月曆區塊 -->
+                <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 sm:p-7 space-y-6">
+                    
+                    <!-- 頂部月份切換與標題 -->
+                    <div class="flex items-center justify-between px-2">
+                        <button onclick="changeMonth(-1)" class="w-10 h-10 bg-white hover:bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center shadow-xs active:scale-95 transition-all">
+                            <svg class="w-4 h-4 text-slate-800" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+                            </svg>
+                        </button>
+                        
+                        <div class="text-center">
+                            <h2 id="calendarTitle" class="text-base font-extrabold text-slate-900 tracking-tight">June 2026</h2>
+                            <p class="text-[10px] text-slate-400 font-bold tracking-wider uppercase mt-0.5">Lab Calendar View</p>
+                        </div>
+
+                        <button onclick="changeMonth(1)" class="w-10 h-10 bg-white hover:bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center shadow-xs active:scale-95 transition-all">
+                            <svg class="w-4 h-4 text-slate-800" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- 星期標題行 -->
+                    <div class="grid grid-cols-7 text-center text-[10px] font-extrabold tracking-widest text-[#a1a1aa] uppercase">
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                        <div>Sun</div>
+                    </div>
+
+                    <!-- 膠囊型日期網格 -->
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-y-4 gap-x-2.5">
+                        <!-- JS 動態插入日期膠囊 -->
+                    </div>
+
+                    <!-- 備註說明 -->
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold pt-2 border-t border-slate-100/80">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-slate-100 border border-slate-200"></span>
+                            <span>週一、四開放討論</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full border-2 border-cyan-500"></span>
+                            <span>目前選定</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 當日排程 (100% 複刻 IMG_2212.PNG) -->
+                <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 sm:p-7 space-y-5">
+                    
+                    <!-- 行程區塊主標題 -->
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <h3 id="scheduleDayTitle" class="text-base font-extrabold text-slate-900">6/4 (週四)</h3>
+                        <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">今日行程</span>
+                    </div>
+
+                    <!-- 動態渲染時段區塊 -->
+                    <div id="timeScheduleList" class="space-y-4">
+                        <!-- 由 JS 依據選取日期的時段自動產生 -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-8 text-center text-[10px] text-slate-400 font-bold tracking-wider uppercase">
+        © 2026 東明研 TMLab • ALL RIGHTS RESERVED
+    </footer>
+
+    <script>
+        // 學生莫蘭迪色球對應資料表 (完美對應 22.42.22.jpg 及 00.23.18.png 馬卡龍粉嫩材質)
+        const STUDENTS = {
+            "趙怡潔": { grade: "碩一", letter: "怡", bg: "bg-[#FFF0F2]", text: "text-[#FF4D80]" },
+            "趙宜潔": { grade: "碩一", letter: "宜", bg: "bg-[#F3E8FF]", text: "text-[#8B5CF6]" },
+            "兆儀節": { grade: "碩二", letter: "儀", bg: "bg-[#E0F2FE]", text: "text-[#0284C7]" },
+            "趙怡捷": { grade: "碩二", letter: "捷", bg: "bg-[#FEF3C7]", text: "text-[#D97706]" }
+        };
+
+        // 預設可多選之討論內容清單 (100% 對接 截圖 2026-06-02 00.01.15.png)
+        const AVAILABLE_TOPICS = [
+            "計劃執行", "生涯", "純聊天", "碩博論", "研討會或期刊", "設計或競賽", "其他備註"
+        ];
+        
+        // 目前使用者選中的討論內容標籤陣列
+        let selectedTopics = ["計劃執行"];
+
+        // 模擬系統預設儲存的預約紀錄 (契合 IMG_2212.PNG 中有多筆預約的視覺豐富感)
+        let bookings = [
+            {
+                id: "mock-1",
+                date: "2026-06-04",
+                name: "趙宜潔",
+                grade: "碩一",
+                startSlot: "19",
+                duration: 40,
+                topics: ["碩博論"],
+                note: "報paper"
+            },
+            {
+                id: "mock-2",
+                date: "2026-06-04",
+                name: "趙怡潔",
+                grade: "碩一",
+                startSlot: "18",
+                duration: 30,
+                topics: ["計劃執行"],
+                note: "—"
+            },
+            {
+                id: "mock-3",
+                date: "2026-06-08",
+                name: "兆儀節",
+                grade: "碩二",
+                startSlot: "19",
+                duration: 60,
+                topics: ["研討會或期刊"],
+                note: "口考大綱確認"
+            }
+        ];
+
+        // 預設日期控制 (學術週期 2026 年 6 月)
+        let calendarYear = 2026;
+        let calendarMonth = 5; // 0-based index (5 = June)
+        
+        let currentSelectedDate = "2026-06-04";
+        let currentSelectedSlot = "";
+
+        // 網頁載入初始化
+        window.onload = function() {
+            renderTopics();
+            populateDateDropdown(calendarYear, calendarMonth);
+            updateDashboard();
+        };
+
+        // 渲染多選標籤 (100% 整合 截圖 2026-06-02 00.01.15.png，完美加寬防擠壓)
+        function renderTopics() {
+            const container = document.getElementById("topicsContainer");
+            container.innerHTML = AVAILABLE_TOPICS.map(topic => {
+                const isSelected = selectedTopics.includes(topic);
+                // 採用一致的圓角 `rounded-full` 語彙，加大水平 padding 確保不貼邊
+                const baseClass = "px-4 py-2 text-xs font-semibold rounded-full border transition-all duration-150 cursor-pointer text-center select-none block";
+                const selectedClass = "bg-slate-900 border-slate-900 text-white shadow-sm";
+                const unselectedClass = "bg-white border-slate-200 text-slate-600 hover:border-slate-300";
+                
+                return `
+                    <button type="button" onclick="toggleTopic('${topic}')" class="${baseClass} ${isSelected ? selectedClass : unselectedClass}">
+                        ${topic}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // 切換複選標籤選取狀態
+        function toggleTopic(topic) {
+            const index = selectedTopics.indexOf(topic);
+            if (index > -1) {
+                // 如果已經存在，且陣列中有多於一個，則移除 (防呆：最少選取一個)
+                if (selectedTopics.length > 1) {
+                    selectedTopics.splice(index, 1);
+                }
+            } else {
+                selectedTopics.push(topic);
+            }
+            renderTopics();
+        }
+
+        // 根據當前年份和月份，自動在預約下拉選單填充只有週一與週四的日期選項
+        function populateDateDropdown(year, month) {
+            const dateSelect = document.getElementById("bookingDate");
+            dateSelect.innerHTML = "";
+
+            const totalDays = new Date(year, month + 1, 0).getDate();
+            let optionFound = false;
+
+            for (let day = 1; day <= totalDays; day++) {
+                const dateObj = new Date(year, month, day);
+                const dayOfWeek = dateObj.getDay();
+
+                // 1 代表週一，4 代表週四
+                if (dayOfWeek === 1 || dayOfWeek === 4) {
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const weekdayLabel = dayOfWeek === 1 ? "週一" : "週四";
+                    
+                    const option = document.createElement("option");
+                    option.value = dateStr;
+                    option.className = "text-slate-800 font-semibold";
+                    option.innerText = `${month + 1}/${day} (${weekdayLabel})`;
+                    
+                    if (dateStr === currentSelectedDate) {
+                        option.selected = true;
+                        optionFound = true;
+                    }
+                    dateSelect.appendChild(option);
+                }
+            }
+
+            // 如果目前選取的日期不在下拉清單中 (例如跨月選取時)，自動選取清單中的第一個
+            if (!optionFound && dateSelect.options.length > 0) {
+                currentSelectedDate = dateSelect.options[0].value;
+                dateSelect.options[0].selected = true;
+            }
+        }
+
+        // 月份切換
+        function changeMonth(direction) {
+            calendarMonth += direction;
+            if (calendarMonth > 11) {
+                calendarMonth = 0;
+                calendarYear++;
+            } else if (calendarMonth < 0) {
+                calendarMonth = 11;
+                calendarYear--;
+            }
+            populateDateDropdown(calendarYear, calendarMonth);
+            updateDashboard();
+        }
+
+        // 時段按鈕切換
+        function selectSlot(slotId) {
+            currentSelectedSlot = slotId;
+            document.querySelectorAll(".time-slot").forEach(btn => {
+                // 採用一致的圓角 `rounded-2xl` 語彙
+                btn.className = "time-slot w-full text-left px-4 py-3 rounded-2xl border border-slate-100 bg-[#f8fafc] text-slate-700 flex justify-between items-center transition-all hover:bg-slate-50";
+            });
+            
+            const activeBtn = document.getElementById("slot" + slotId);
+            activeBtn.className = "time-slot w-full text-left px-4 py-3 rounded-2xl border-cyan-500 bg-cyan-50/20 text-cyan-950 ring-1 ring-cyan-500 flex justify-between items-center transition-all";
+        }
+
+        // 當日期選擇下拉選單變更時，同步月曆選中狀態
+        function syncCalendarSelection(dateStr) {
+            currentSelectedDate = dateStr;
+            const parsedDate = new Date(dateStr);
+            if (!isNaN(parsedDate)) {
+                calendarYear = parsedDate.getFullYear();
+                calendarMonth = parsedDate.getMonth();
+            }
+            updateDashboard();
+        }
+
+        // 核心演算法：計算當日各時段的分配賸餘 (防超限)
+        function getTimelineStatus(targetDate) {
+            let slotCapacities = {
+                "18": { booked: 0, max: 60, occupants: [] },
+                "19": { booked: 0, max: 60, occupants: [] },
+                "20": { booked: 0, max: 60, occupants: [] }
+            };
+
+            bookings.filter(b => b.date === targetDate).forEach(booking => {
+                let startHr = parseInt(booking.startSlot, 10);
+                let durationRemaining = booking.duration;
+
+                while (durationRemaining > 0) {
+                    let hrKey = startHr.toString();
+                    if (!slotCapacities[hrKey]) break;
+
+                    let alreadyBooked = slotCapacities[hrKey].booked;
+                    let spaceInSlot = slotCapacities[hrKey].max - alreadyBooked;
+
+                    let slice = Math.min(durationRemaining, spaceInSlot);
+                    if (slice <= 0) break;
+
+                    slotCapacities[hrKey].booked += slice;
+                    slotCapacities[hrKey].occupants.push({
+                        id: booking.id,
+                        name: booking.name,
+                        minutes: slice,
+                        topics: booking.topics || [],
+                        note: booking.note || "—"
+                    });
+
+                    durationRemaining -= slice;
+                    startHr += 1;
+                }
+            });
+
+            return slotCapacities;
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById("calendarGrid");
+            const title = document.getElementById("calendarTitle");
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            title.innerText = `${monthNames[calendarMonth]} ${calendarYear}`;
+
+            grid.innerHTML = "";
+
+            const firstDayIndex = new Date(calendarYear, calendarMonth, 1).getDay();
+            // 週一作為第一天（0=Mon, 6=Sun）
+            let startOffset = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+            const totalDays = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+            const prevTotalDays = new Date(calendarYear, calendarMonth, 0).getDate();
+
+            // 1. 填充上月空白
+            for (let i = startOffset; i > 0; i--) {
+                const dayNum = prevTotalDays - i + 1;
+                const div = document.createElement("div");
+                div.className = "text-[#d1d1d6] text-xs font-semibold py-3 text-center opacity-30 select-none";
+                div.innerText = dayNum;
+                grid.appendChild(div);
+            }
+
+            // 2. 渲染當月日期膠囊 (統一圓角 `rounded-2xl` 與整體視覺呼應)
+            for (let day = 1; day <= totalDays; day++) {
+                const dateStr = `${calendarYear}-${String(calendarMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dateObj = new Date(calendarYear, calendarMonth, day);
+                const dayOfWeek = dateObj.getDay(); 
+                const isBookingDay = (dayOfWeek === 1 || dayOfWeek === 4); // 週一或週四
+                
+                const isSelected = (dateStr === currentSelectedDate);
+
+                // 取出該日的預約
+                let dayBookings = bookings.filter(b => b.date === dateStr);
+
+                const cell = document.createElement("div");
+                
+                // 直立高度圓潤容器 (22.42.22.jpg 格式)
+                let cellClasses = "flex flex-col justify-between items-center py-2 bg-[#f8fafc] text-[#1c1c1e] rounded-2xl h-[72px] cursor-pointer transition-all duration-200 relative ";
+                
+                if (isSelected) {
+                    cellClasses += "bg-white ring-2 ring-cyan-500 shadow-xs z-10 ";
+                } else if (isBookingDay) {
+                    cellClasses += "bg-[#f1f5f9]/80 hover:bg-[#e2e8f0]/60 border border-[#f1f5f9] ";
+                } else {
+                    cellClasses += "bg-[#f8fafc]/30 text-slate-300 opacity-60 cursor-default ";
+                }
+
+                cell.className = cellClasses;
+                cell.onclick = () => {
+                    currentSelectedDate = dateStr;
+                    
+                    // 同步變更左側下拉選單
+                    const dateSelect = document.getElementById("bookingDate");
+                    dateSelect.value = dateStr;
+                    
+                    updateDashboard();
+                };
+
+                // 渲染縮寫 Logo 圓球 (100% 配對 00.23.18.png 高清質感)
+                let logosHtml = "";
+                if (dayBookings.length > 0) {
+                    logosHtml = `<div class="flex -space-x-1.5 justify-center items-center overflow-hidden">`;
+                    dayBookings.slice(0, 2).forEach(b => {
+                        const stud = STUDENTS[b.name] || { letter: "學", bg: "bg-slate-100", text: "text-slate-500" };
+                        logosHtml += `
+                            <div class="w-5 h-5 rounded-full ${stud.bg} ${stud.text} flex items-center justify-center font-black text-[9px] border border-white" title="${b.name}">
+                                ${stud.letter}
+                            </div>`;
+                    });
+                    if (dayBookings.length > 2) {
+                        logosHtml += `
+                            <div class="w-5 h-5 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-[8px] border border-white">
+                                +${dayBookings.length - 2}
+                            </div>`;
+                    }
+                    logosHtml += `</div>`;
+                } else {
+                    logosHtml = isBookingDay ? `<span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>` : `<span class="h-1.5"></span>`;
+                }
+
+                cell.innerHTML = `
+                    <span class="text-xs font-bold tracking-tight">${day}</span>
+                    ${logosHtml}
+                `;
+                grid.appendChild(cell);
+            }
+
+            // 3. 填充下月空白
+            const totalCells = startOffset + totalDays;
+            const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+            for (let i = 1; i <= remaining; i++) {
+                const div = document.createElement("div");
+                div.className = "text-[#d1d1d6] text-xs font-semibold py-3 text-center opacity-30 select-none";
+                div.innerText = i;
+                grid.appendChild(div);
+            }
+        }
+
+        function renderTimeSchedule() {
+            const container = document.getElementById("timeScheduleList");
+            const dayTitle = document.getElementById("scheduleDayTitle");
+
+            const dateObj = new Date(currentSelectedDate);
+            const weekDays = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+            const dayOfWeekStr = weekDays[dateObj.getDay()];
+            
+            dayTitle.innerText = `${dateObj.getMonth() + 1}/${dateObj.getDate()} (${dayOfWeekStr})`;
+
+            const capacities = getTimelineStatus(currentSelectedDate);
+            container.innerHTML = "";
+
+            const targetSlots = ["18", "19", "20"];
+
+            targetSlots.forEach(slot => {
+                const startHr = parseInt(slot, 10);
+                const endHr = startHr + 1;
+                const slotCap = capacities[slot];
+
+                // 創建外層時段大框 (統一圓角 `rounded-2xl`)
+                const slotContainer = document.createElement("div");
+                slotContainer.className = "p-4 bg-slate-50/50 rounded-2xl border border-slate-100/80 space-y-3";
+
+                // 時段標題 (如：18:00-19:00)
+                const slotHeader = document.createElement("div");
+                slotHeader.className = "text-xs font-extrabold text-slate-800 uppercase tracking-wide";
+                slotHeader.innerText = `${startHr}:00-${endHr}:00`;
+                slotContainer.appendChild(slotHeader);
+
+                // 渲染該時段內的所有細部預約 (100% 複刻 IMG_2212.PNG，圓角統一為 `rounded-xl`)
+                if (slotCap.occupants.length === 0) {
+                    const emptyEl = document.createElement("div");
+                    emptyEl.className = "text-xs text-slate-400 italic font-semibold py-1";
+                    emptyEl.innerText = "目前空白時段";
+                    slotContainer.appendChild(emptyEl);
+                } else {
+                    const cardsContainer = document.createElement("div");
+                    cardsContainer.className = "space-y-2.5";
+
+                    slotCap.occupants.forEach(occ => {
+                        const card = document.createElement("div");
+                        card.className = "bg-white border border-slate-100 p-3.5 rounded-xl shadow-xs relative flex flex-col justify-between";
+
+                        const topicsString = occ.topics && occ.topics.length > 0 ? occ.topics.join('、') : "—";
+
+                        card.innerHTML = `
+                            <div class="space-y-1 text-xs">
+                                <div class="font-extrabold text-slate-800">
+                                    ${occ.name} <span class="text-slate-400 font-medium mx-1">•</span> ${occ.minutes} 分鐘
+                                </div>
+                                <div class="text-slate-500 font-medium">主題：${topicsString}</div>
+                                <div class="text-slate-400 font-medium">備註：${occ.note}</div>
+                            </div>
+                            <div class="flex justify-end mt-2">
+                                <button onclick="deleteBooking('${occ.id}')" 
+                                    class="px-2.5 py-1 text-[10px] font-bold text-[#FF4D80] hover:text-[#e03a6c] bg-[#FFF0F2] hover:bg-[#FFE4E6] border border-[#FFE4E6] rounded-lg active:scale-95 transition-all">
+                                    刪除此筆
+                                </button>
+                            </div>
+                        `;
+                        cardsContainer.appendChild(card);
+                    });
+
+                    slotContainer.appendChild(cardsContainer);
+                }
+
+                container.appendChild(slotContainer);
+            });
+        }
+
+        // 刪除預約 (對應明細中「刪除此筆」)
+        function deleteBooking(bookingId) {
+            bookings = bookings.filter(b => b.id !== bookingId);
+            updateDashboard();
+            showAlert("🎉 已成功取消該項預約並釋放空間！", "success");
+        }
+
+        // 更新介面大盤資訊
+        function updateDashboard() {
+            renderCalendar();
+            renderTimeSchedule();
+
+            // 1. 同步刷新填表時段剩餘資訊
+            const targetDate = currentSelectedDate;
+            const capacities = getTimelineStatus(targetDate);
+
+            ["18", "19", "20"].forEach(hr => {
+                const cap = capacities[hr];
+                const available = cap.max - cap.booked;
+                const badge = document.getElementById(`slot${hr}Badge`);
+
+                if (available <= 0) {
+                    badge.innerText = `⚠️ 已額滿`;
+                    badge.className = "text-[10px] px-2 py-0.5 rounded-full font-bold bg-[#FCE8E6] text-[#C5221F]";
+                } else if (available < 30) {
+                    badge.innerText = `⚠️ 剩餘 ${available} 分鐘`;
+                    badge.className = "text-[10px] px-2 py-0.5 rounded-full font-bold bg-[#FEF7E0] text-[#B06000]";
+                } else {
+                    badge.innerText = `剩餘 ${available} 分鐘`;
+                    badge.className = "text-[10px] px-2 py-0.5 rounded-full font-bold bg-[#E6F4EA] text-[#137333]";
+                }
+            });
+        }
+
+        // 處理預約送出與防超預約機制 (與 00.01.34.png Wording 同步)
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            hideAlert();
+
+            const name = document.getElementById("studentSelect").value;
+            const date = currentSelectedDate;
+            const duration = parseInt(document.getElementById("durationSelect").value, 10);
+            const note = document.getElementById("noteInput").value.trim() || "—";
+
+            // 1. 基礎防呆
+            if (!name || !currentSelectedSlot) {
+                showAlert("❌ 請先選擇成員姓名與起始預約時段！", "error");
+                return;
+            }
+
+            // 2. 週一、四防呆
+            const dateObj = new Date(date);
+            const dayOfWeek = dateObj.getDay();
+            if (dayOfWeek !== 1 && dayOfWeek !== 4) {
+                showAlert("❌ 防呆警告：系統限制僅能於週一、週四預約！", "error");
+                return;
+            }
+
+            // 3. 跨時段容量動態計算
+            let currentStatus = getTimelineStatus(date);
+            let checkHr = parseInt(currentSelectedSlot, 10);
+            let remDuration = duration;
+
+            while (remDuration > 0) {
+                let hrKey = checkHr.toString();
+                if (!currentStatus[hrKey]) {
+                    showAlert(`❌ 超出開放上限！耗時 ${duration} 分鐘已跨越至 21:00 之後。`, "error");
+                    return;
+                }
+
+                let availableMins = currentStatus[hrKey].max - currentStatus[hrKey].booked;
+                let neededMins = Math.min(remDuration, 60);
+
+                if (neededMins > availableMins) {
+                    // 完美複刻 截圖 2026-06-02 00.01.34.png Wording 調整：
+                    // ⚠️ 剩餘可預約時間不足，19:00 時段僅剩 20 分鐘。
+                    showAlert(`⚠️ 剩餘可預約時間不足，${hrKey}:00 時段僅剩 ${availableMins} 分鐘。`, "error");
+                    return;
+                }
+
+                remDuration -= neededMins;
+                checkHr += 1;
+            }
+
+            // 4. 新建預約
+            const newBooking = {
+                id: 'booking-' + Date.now(),
+                date: date,
+                name: name,
+                grade: STUDENTS[name]?.grade || "碩一",
+                startSlot: currentSelectedSlot,
+                duration: duration,
+                topics: [...selectedTopics], // 複選標籤陣列
+                note: note
+            };
+
+            bookings.push(newBooking);
+            
+            // 重置表單填寫 (保留預設複選主題：計劃執行)
+            document.getElementById("noteInput").value = "";
+            selectedTopics = ["計劃執行"];
+            renderTopics();
+            updateDashboard();
+            showAlert("預約成功！", "success");
+        }
+
+        // 輔助提示框 (100% 複刻 截圖 2026-06-02 00.01.34.png 的紅底淡框微動畫與統一 rounded-xl)
+        function showAlert(msg, type) {
+            const alertBox = document.getElementById("alertBox");
+            alertBox.classList.remove("hidden");
+            if (type === "error") {
+                // 使用 00.23.18.png 中的馬卡龍櫻花粉色調 搭配 玫瑰紅邊線與深紅色文字
+                alertBox.className = "p-3.5 bg-[#FFF0F2] text-[#FF4D80] text-[11px] font-bold rounded-xl border border-[#FFE4E6] block animate-pulse my-4";
+            } else {
+                // 成功則採用簡短的「預約成功！」與清新薄荷綠
+                alertBox.className = "p-3.5 bg-[#E6F4EA] text-[#137333] text-[11px] font-bold rounded-xl border border-[#D1E7DD] block my-4";
+            }
+            alertBox.innerText = msg;
+        }
+
+        function hideAlert() {
+            const alertBox = document.getElementById("alertBox");
+            alertBox.className = "hidden";
+        }
+    </script>
+</body>
+</html>
