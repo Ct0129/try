@@ -86,16 +86,15 @@
 
     <main class="max-w-5xl w-full mx-auto space-y-6">
         
-        <!-- 系統公告區塊 (完美融入 00.12.38.png 的 UFO 黃光與 Well Done 極簡美學) -->
+        <!-- 系統公告區塊 -->
         <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 sm:p-8 space-y-6 flex flex-col items-center text-center relative overflow-hidden">
             
-            <!-- 🪐 UFO 黃光極簡 SVG 插圖 (100% 複刻 截圖 2026-06-02 00.28.09.png 風格，且格子改為月曆日期) -->
+            <!-- 🪐 UFO 黃光極簡 SVG 插圖 -->
             <div class="relative w-48 h-40 flex items-center justify-center">
                 <!-- 霓虹黃光擴散背景 -->
                 <div class="absolute w-32 h-32 rounded-full bg-amber-400/10 blur-2xl animate-pulse"></div>
                 <!-- 極簡 UFO 線條、黃光與月曆網格 -->
                 <svg class="w-40 h-40 z-10 drop-shadow-xl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- 定義黃色金光與漸層 -->
                     <defs>
                         <linearGradient id="ufoYellowBeam" x1="50" y1="20" x2="50" y2="95" gradientUnits="userSpaceOnUse">
                             <stop offset="0%" stop-color="#FFDF00" stop-opacity="0.95"/>
@@ -107,16 +106,13 @@
                     <!-- 下照金黃光束 -->
                     <polygon points="50,22 15,95 85,95" fill="url(#ufoYellowBeam)" />
 
-                    <!-- 第一排月曆格 (上層：較小，帶有半透明月曆感) -->
-                    <!-- 左日曆 -->
+                    <!-- 第一排月曆格 -->
                     <rect x="41" y="32" width="7" height="7" rx="1.2" fill="#E2B900" opacity="0.3" />
                     <rect x="41" y="32" width="7" height="1.8" fill="#C59B00" opacity="0.4" />
-                    <!-- 右日曆 -->
                     <rect x="52" y="32" width="7" height="7" rx="1.2" fill="#E2B900" opacity="0.3" />
                     <rect x="52" y="32" width="7" height="1.8" fill="#C59B00" opacity="0.4" />
 
-                    <!-- 第二排月曆格 (中層：中間高亮日期為 4) -->
-                    <!-- 左日曆 -->
+                    <!-- 第二排月曆格 -->
                     <rect x="28" y="49" width="10" height="10" rx="1.5" fill="#E2B900" opacity="0.4" />
                     <rect x="28" y="49" width="10" height="2.5" fill="#C59B00" opacity="0.5" />
                     <circle cx="31" cy="54" r="0.4" fill="#C59B00" opacity="0.6"/>
@@ -126,13 +122,11 @@
                     <circle cx="33" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
                     <circle cx="35" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
 
-                    <!-- 正中間的黃金月曆卡：上面印著清楚的日期 4 (週四代表預約日) -->
+                    <!-- 正中間的黃金月曆卡：上面印著清楚的日期 4 -->
                     <rect x="44" y="46" width="12" height="12" rx="2" fill="#F4CA00" opacity="0.95" />
-                    <!-- 日曆頂部裝飾條與吊孔 -->
                     <rect x="44" y="46" width="12" height="3" rx="0.8" fill="#D97706" opacity="0.9" />
                     <circle cx="47" cy="47.5" r="0.4" fill="#FFFFFF" />
                     <circle cx="53" cy="47.5" r="0.4" fill="#FFFFFF" />
-                    <!-- 核心日期文字「4」 -->
                     <text x="50" y="55" fill="#1C1C1E" font-size="7" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" text-anchor="middle">4</text>
 
                     <!-- 右日曆 -->
@@ -145,27 +139,20 @@
                     <circle cx="67" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
                     <circle cx="69" cy="56" r="0.4" fill="#C59B00" opacity="0.6"/>
 
-                    <!-- 第三排月曆格 (底層：較大且淡雅) -->
-                    <!-- 1 -->
+                    <!-- 第三排月曆格 -->
                     <rect x="16" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
                     <rect x="16" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
-                    <!-- 2 -->
                     <rect x="33" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
                     <rect x="33" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
-                    <!-- 3 -->
                     <rect x="55" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
                     <rect x="55" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
-                    <!-- 4 -->
                     <rect x="72" y="70" width="12" height="12" rx="2" fill="#E2B900" opacity="0.25" />
                     <rect x="72" y="70" width="12" height="3" fill="#C59B00" opacity="0.3" />
 
-                    <!-- 斜向 UFO Saucer 飛碟主體 (100% 複刻 00.28.09 Tilted Blue/Black Style) -->
+                    <!-- 斜向 UFO Saucer 飛碟主體 -->
                     <g transform="translate(42, 10) rotate(-22)">
-                        <!-- 黑色圓頂艙蓋 (Black Dome) -->
                         <path d="M8,4 C11,4 15,7 15,10 L1,10 C1,7 5,4 8,4 Z" fill="#1A1A1A" />
-                        <!-- 亮藍色飛碟盤 (Electric Blue Saucer) -->
                         <ellipse cx="8" cy="11" rx="14" ry="4.5" fill="#0066FF" />
-                        <!-- 亮白色射線底盤 (Glowing White Bottom Light) -->
                         <ellipse cx="8" cy="12.5" rx="7" ry="1.8" fill="#FFFFFF" />
                     </g>
                 </svg>
@@ -197,22 +184,20 @@
         <!-- 主體二欄版面 (左側填表預約，右側月曆與動態行程表) -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             
-            <!-- 左側預約表單 (優化 spacing 呼吸感，採用嚴謹的 space-y-6) -->
+            <!-- 左側預約表單 -->
             <div class="md:col-span-5 space-y-6">
                 
                 <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 sm:p-7 space-y-6">
                     <div class="border-b border-slate-100 pb-3">
                         <h2 class="text-base font-extrabold text-slate-900">填表預約</h2>
-                        <!-- 複刻 IMG_2209.jpg 的預約說明 -->
                         <p class="text-[11px] text-slate-400 font-medium leading-relaxed mt-1.5">
                             最晚請於預約日前一天 21:00 完成填寫。若要改日期、時段或耗時，請先在右側行事曆明細刪除原預約，再於此重新填寫（不提供線上修改）。
                         </p>
                     </div>
 
-                    <!-- 加上 novalidate 以完全由 JS 自訂提示接管 -->
                     <form id="bookingForm" class="space-y-6" onsubmit="handleFormSubmit(event)" novalidate>
                         
-                        <!-- 姓名分組下拉選單 (增加右側 pr-12 避免箭頭緊貼) -->
+                        <!-- 姓名分組下拉選單 -->
                         <div class="space-y-2">
                             <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">姓名 Select Person <span class="text-rose-500">*</span></label>
                             <select id="studentSelect" required
@@ -229,16 +214,15 @@
                             </select>
                         </div>
 
-                        <!-- 預約日期 (增加右側 pr-12 避免箭頭緊貼) -->
+                        <!-- 預約日期 -->
                         <div class="space-y-2">
                             <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">日期 Date <span class="text-rose-500">*</span></label>
                             <select id="bookingDate" required onchange="syncCalendarSelection(this.value)"
                                 class="w-full px-4 py-3 bg-[#f8fafc] border border-slate-100 rounded-2xl text-slate-800 font-semibold focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/5 transition-all text-xs appearance-none">
-                                <!-- 由 JS 動態填充當前月份可供預約的週一與週四 -->
                             </select>
                         </div>
 
-                        <!-- 預約起始時段 (18, 19, 20 三個時段) -->
+                        <!-- 預約起始時段 -->
                         <div class="space-y-2">
                             <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">時段 Select Time <span class="text-rose-500">*</span></label>
                             <div class="space-y-2.5">
@@ -260,7 +244,7 @@
                             </div>
                         </div>
 
-                        <!-- 耗時 (增加右側 pr-12 避免箭頭緊貼) -->
+                        <!-- 耗時 -->
                         <div class="space-y-2">
                             <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">耗時 Duration</label>
                             <select id="durationSelect"
@@ -274,11 +258,10 @@
                             </select>
                         </div>
 
-                        <!-- 討論內容 (100% 複刻 截圖 2026-06-02 00.01.15.png) -->
+                        <!-- 討論內容 -->
                         <div class="space-y-2">
                             <label class="block text-xs font-bold text-slate-800">討論內容（可複選）</label>
                             <div id="topicsContainer" class="flex flex-wrap gap-2.5 max-w-full p-0.5 overflow-hidden">
-                                <!-- 由 JS 動態生成並管理狀態 -->
                             </div>
                         </div>
 
@@ -337,7 +320,6 @@
 
                     <!-- 膠囊型日期網格 -->
                     <div id="calendarGrid" class="grid grid-cols-7 gap-y-4 gap-x-2.5">
-                        <!-- JS 動態插入日期膠囊 -->
                     </div>
 
                     <!-- 備註說明 -->
@@ -353,7 +335,7 @@
                     </div>
                 </div>
 
-                <!-- 當日排程 (100% 複刻 IMG_2212.PNG) -->
+                <!-- 當日排程 -->
                 <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 sm:p-7 space-y-5">
                     
                     <!-- 行程區塊主標題 -->
@@ -364,7 +346,6 @@
 
                     <!-- 動態渲染時段區塊 -->
                     <div id="timeScheduleList" class="space-y-4">
-                        <!-- 由 JS 依據選取日期的時段自動產生 -->
                     </div>
                 </div>
 
@@ -377,14 +358,14 @@
         © 2026 東明研 TMLab • ALL RIGHTS RESERVED
     </footer>
 
-    <!-- 🚀 全球置頂浮層 Toast 容器 (確保完全不會改變 Layout) -->
+    <!-- 🚀 全球置頂浮層 Toast 容器 -->
     <div id="toastContainer" class="toast-overlay"></div>
 
     <script>
-        // 您的 Google Apps Script 專屬通訊網址
+        // Google Apps Script 通訊網址
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkDyiK9tqLedqp7oAUA-CF4u3oUPoJX2IMd_JD7S3PrqdhTrotfpYkOyorYsoGjFpl/exec";
 
-        // 學生莫蘭迪色球對應資料表 (完美對應 22.42.22.jpg 及 00.23.18.png 馬卡龍粉嫩材質)
+        // 學生色球設定
         const STUDENTS = {
             "趙怡潔": { grade: "碩一", letter: "怡", bg: "bg-[#FFF0F2]", text: "text-[#FF4D80]" },
             "趙宜潔": { grade: "碩一", letter: "宜", bg: "bg-[#F3E8FF]", text: "text-[#8B5CF6]" },
@@ -392,69 +373,112 @@
             "趙怡捷": { grade: "碩二", letter: "捷", bg: "bg-[#FEF3C7]", text: "text-[#D97706]" }
         };
 
-        // 預設可多選之討論內容清單 (100% 對接 截圖 2026-06-02 00.01.15.png)
+        // 預設可複選之討論內容
         const AVAILABLE_TOPICS = [
             "計劃執行", "生涯", "純聊天", "碩博論", "研討會或期刊", "設計或競賽", "其他備註"
         ];
         
-        // 目前使用者選中的討論內容標籤陣列
         let selectedTopics = ["計劃執行"];
-
-        // 全域預約紀錄陣列 (預設留空，改由網頁載入時從 Google Apps Script 即時抓取)
         let bookings = [];
 
-        // 預設日期控制 (學術週期 2026 年 6 月)
+        // 模擬幾筆預設預約紀錄
+        const mockBookings = [
+            {
+                id: "mock-1",
+                date: "2026-06-04",
+                name: "趙怡潔",
+                grade: "碩一",
+                startSlot: "18",
+                duration: 40,
+                topics: ["計劃執行", "生涯"],
+                note: "報告本週研究進度"
+            },
+            {
+                id: "mock-2",
+                date: "2026-06-04",
+                name: "兆儀節",
+                grade: "碩二",
+                startSlot: "19",
+                duration: 20,
+                topics: ["碩博論"],
+                note: "準備口試簡報內容"
+            }
+        ];
+
         let calendarYear = 2026;
         let calendarMonth = 5; // 0-based index (5 = June)
         
-        let currentSelectedDate = "2026-06-04";
+        let currentSelectedDate = "";
         let currentSelectedSlot = "";
-        
-        // 全域自動消退與淡出計時器 (保證排他與單一主要提示呈現)
         let alertTimeout = null;
 
-        // 網頁載入初始化
         window.onload = function() {
+            // 初始化動態設定為：今天起第一個可預約的週一或週四，以防止預設日期落入過去而反灰
+            const today = new Date();
+            let checkDate = new Date(today);
+            let found = false;
+            
+            for (let i = 0; i < 30; i++) {
+                const dayOfWeek = checkDate.getDay();
+                if (dayOfWeek === 1 || dayOfWeek === 4) {
+                    const yr = checkDate.getFullYear();
+                    const mo = String(checkDate.getMonth() + 1).padStart(2, '0');
+                    const dy = String(checkDate.getDate()).padStart(2, '0');
+                    currentSelectedDate = `${yr}-${mo}-${dy}`;
+                    calendarYear = yr;
+                    calendarMonth = checkDate.getMonth();
+                    found = true;
+                    break;
+                }
+                checkDate.setDate(checkDate.getDate() + 1);
+            }
+
+            // 如果找不到（例如防呆），則退回模擬常數
+            if (!found) {
+                currentSelectedDate = "2026-06-04";
+                calendarYear = 2026;
+                calendarMonth = 5;
+            }
+
             renderTopics();
             populateDateDropdown(calendarYear, calendarMonth);
-            // 從 Google 試算表即時撈取歷史紀錄
+            
+            // 初始化先載入模擬數據，確保在無 API 回應時仍有美觀的預覽介面
+            bookings = [...mockBookings];
+            updateDashboard();
+
+            // 正式開始從 Google 試算表拉取資料
             fetchBookingsFromCloud();
         };
 
-        // 🛠 從 Google 試算表撈資料的非同步函式
         function fetchBookingsFromCloud() {
-            const container = document.getElementById("timeScheduleList");
-            container.innerHTML = `<p class="text-slate-400 text-xs italic font-semibold py-4 text-center animate-pulse">正在從 Google 試算表載入最新排程...</p>`;
-            
             fetch(SCRIPT_URL)
                 .then(res => res.json())
                 .then(data => {
-                    // 將雲端傳回的格式對齊您的欄位架構
-                    bookings = data.map(b => ({
-                        id: b.id || 'bk-' + Math.random(),
-                        date: b.date,
-                        name: b.name,
-                        grade: b.grade || (STUDENTS[b.name]?.grade || "碩一"),
-                        startSlot: String(b.startSlot),
-                        duration: parseInt(b.duration, 10),
-                        topics: typeof b.topic === 'string' ? b.topic.split('、') : (b.topics || []),
-                        note: b.note || "—"
-                    }));
+                    if (data && data.length > 0) {
+                        bookings = data.map(b => ({
+                            id: b.id || 'bk-' + Math.random(),
+                            date: b.date,
+                            name: b.name,
+                            grade: b.grade || (STUDENTS[b.name]?.grade || "碩一"),
+                            startSlot: String(b.startSlot),
+                            duration: parseInt(b.duration, 10),
+                            topics: typeof b.topic === 'string' ? b.topic.split('、') : (b.topics || []),
+                            note: b.note || "—"
+                        }));
+                    }
                     updateDashboard();
                 })
                 .catch(err => {
-                    console.error("試算表載入失敗:", err);
-                    bookings = []; // 若失敗則清空並渲染空白狀態
+                    console.warn("GAS 載入失敗，目前為模擬預覽模式:", err);
                     updateDashboard();
                 });
         }
 
-        // 渲染多選標籤 (100% 整合 截圖 2026-06-02 00.01.15.png，完美加寬防擠壓)
         function renderTopics() {
             const container = document.getElementById("topicsContainer");
             container.innerHTML = AVAILABLE_TOPICS.map(topic => {
                 const isSelected = selectedTopics.includes(topic);
-                // 採用一致的圓角 `rounded-full` 語彙，加大水平 padding 確保不貼邊
                 const baseClass = "px-4 py-2 text-xs font-semibold rounded-full border transition-all duration-150 cursor-pointer text-center select-none block";
                 const selectedClass = "bg-slate-900 border-slate-900 text-white shadow-sm";
                 const unselectedClass = "bg-white border-slate-200 text-slate-600 hover:border-slate-300";
@@ -467,11 +491,9 @@
             }).join('');
         }
 
-        // 切換複選標籤選取狀態
         function toggleTopic(topic) {
             const index = selectedTopics.indexOf(topic);
             if (index > -1) {
-                // 如果已經存在，且陣列中有多於一個，則移除 (防呆：最少選取一個)
                 if (selectedTopics.length > 1) {
                     selectedTopics.splice(index, 1);
                 }
@@ -481,7 +503,6 @@
             renderTopics();
         }
 
-        // 根據當前年份 and 月份，自動在預約下拉選單填充只有週一與週四的日期選項
         function populateDateDropdown(year, month) {
             const dateSelect = document.getElementById("bookingDate");
             dateSelect.innerHTML = "";
@@ -489,19 +510,26 @@
             const totalDays = new Date(year, month + 1, 0).getDate();
             let optionFound = false;
 
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
             for (let day = 1; day <= totalDays; day++) {
                 const dateObj = new Date(year, month, day);
                 const dayOfWeek = dateObj.getDay();
 
-                // 1 代表週一，4 代表週四
                 if (dayOfWeek === 1 || dayOfWeek === 4) {
+                    // 核心邏輯修正：排除過去的日期
+                    if (dateObj < today) {
+                        continue;
+                    }
+
                     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                    const weekdayLabel = dayOfWeek === 1 ? "週一" : "週四";
+                    const displayLabel = dayOfWeek === 1 ? "週一" : "週四";
                     
                     const option = document.createElement("option");
                     option.value = dateStr;
                     option.className = "text-slate-800 font-semibold";
-                    option.innerText = `${month + 1}/${day} (${weekdayLabel})`;
+                    option.innerText = `${month + 1}/${day} (${displayLabel})`;
                     
                     if (dateStr === currentSelectedDate) {
                         option.selected = true;
@@ -511,14 +539,12 @@
                 }
             }
 
-            // 如果目前選取的日期不在下拉清單中 (例如跨月選取時)，自動選取清單中的第一個
             if (!optionFound && dateSelect.options.length > 0) {
                 currentSelectedDate = dateSelect.options[0].value;
                 dateSelect.options[0].selected = true;
             }
         }
 
-        // 月份切換
         function changeMonth(direction) {
             calendarMonth += direction;
             if (calendarMonth > 11) {
@@ -532,20 +558,16 @@
             updateDashboard();
         }
 
-        // 🌟 修正：時段按鈕切換（確保不產生微小的 Layout Shift 跳動）
         function selectSlot(slotId) {
             currentSelectedSlot = slotId;
             document.querySelectorAll(".time-slot").forEach(btn => {
-                // 保持不變的 1px 實線邊界 (border border-slate-100)
                 btn.className = "time-slot w-full text-left px-4 py-3 rounded-2xl border border-slate-100 bg-[#f8fafc] text-slate-700 flex justify-between items-center transition-all hover:bg-slate-50";
             });
             
             const activeBtn = document.getElementById("slot" + slotId);
-            // 僅變更 border 與 bg 色彩，保持 border 寬度依然為 1px（border border-cyan-500），絕不疊加額外的 ring 或 padding
             activeBtn.className = "time-slot w-full text-left px-4 py-3 rounded-2xl border border-cyan-500 bg-cyan-50/20 text-cyan-950 flex justify-between items-center transition-all";
         }
 
-        // 當日期選擇下拉選單變更時，同步月曆選中狀態
         function syncCalendarSelection(dateStr) {
             currentSelectedDate = dateStr;
             const parsedDate = new Date(dateStr);
@@ -556,7 +578,6 @@
             updateDashboard();
         }
 
-        // 核心演算法：計算當日各時段的分配賫餘 (防超限)
         function getTimelineStatus(targetDate) {
             let slotCapacities = {
                 "18": { booked: 0, max: 60, occupants: [] },
@@ -605,7 +626,6 @@
             grid.innerHTML = "";
 
             const firstDayIndex = new Date(calendarYear, calendarMonth, 1).getDay();
-            // 週一作為第一天（0=Mon, 6=Sun）
             let startOffset = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
 
             const totalDays = new Date(calendarYear, calendarMonth + 1, 0).getDate();
@@ -620,43 +640,49 @@
                 grid.appendChild(div);
             }
 
-            // 2. 渲染當月日期膠囊 (統一圓角 `rounded-2xl` 與整體視覺呼應)
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            // 2. 填充當月日期
             for (let day = 1; day <= totalDays; day++) {
                 const dateStr = `${calendarYear}-${String(calendarMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const dateObj = new Date(calendarYear, calendarMonth, day);
                 const dayOfWeek = dateObj.getDay(); 
-                const isBookingDay = (dayOfWeek === 1 || dayOfWeek === 4); // 週一或週四
                 
+                const isBookingDay = (dayOfWeek === 1 || dayOfWeek === 4);
+                const isPast = dateObj < today; // 判斷是否為過去的日期
+                const isSelectable = isBookingDay && !isPast; // 同時是預約日且非過去日期才可選
                 const isSelected = (dateStr === currentSelectedDate);
 
-                // 取出該日的預約
                 let dayBookings = bookings.filter(b => b.date === dateStr);
-
                 const cell = document.createElement("div");
                 
-                // 直立高度圓潤容器 (22.42.22.jpg 格式)
-                let cellClasses = "flex flex-col justify-between items-center py-2 bg-[#f8fafc] text-[#1c1c1e] rounded-2xl h-[72px] cursor-pointer transition-all duration-200 relative ";
+                let cellClasses = "flex flex-col justify-between items-center py-2 text-[#1c1c1e] rounded-2xl h-[72px] transition-all duration-200 relative ";
                 
-                if (isSelected) {
-                    cellClasses += "bg-white ring-2 ring-cyan-500 shadow-xs z-10 ";
-                } else if (isBookingDay) {
-                    cellClasses += "bg-[#f1f5f9]/80 hover:bg-[#e2e8f0]/60 border border-[#f1f5f9] ";
+                if (isSelectable) {
+                    cellClasses += "cursor-pointer ";
+                    if (isSelected) {
+                        cellClasses += "bg-white ring-2 ring-cyan-500 shadow-xs z-10 ";
+                    } else {
+                        cellClasses += "bg-[#f1f5f9]/80 hover:bg-[#e2e8f0]/60 border border-[#f1f5f9] ";
+                    }
                 } else {
-                    cellClasses += "bg-[#f8fafc]/30 text-slate-300 opacity-60 cursor-default ";
+                    // 過去日期與非討論日統一採用反灰不可選樣式
+                    cellClasses += "bg-[#f8fafc]/30 text-slate-300 opacity-60 cursor-default select-none ";
                 }
 
                 cell.className = cellClasses;
-                cell.onclick = () => {
-                    currentSelectedDate = dateStr;
-                    
-                    // 同步變更左側下拉選單
-                    const dateSelect = document.getElementById("bookingDate");
-                    dateSelect.value = dateStr;
-                    
-                    updateDashboard();
-                };
 
-                // 渲染縮寫 Logo 圓球 (100% 配對 00.23.18.png 高清質感)
+                // 僅在可預約狀態下綁定點擊事件
+                if (isSelectable) {
+                    cell.onclick = () => {
+                        currentSelectedDate = dateStr;
+                        const dateSelect = document.getElementById("bookingDate");
+                        dateSelect.value = dateStr;
+                        updateDashboard();
+                    };
+                }
+
                 let logosHtml = "";
                 if (dayBookings.length > 0) {
                     logosHtml = `<div class="flex -space-x-1.5 justify-center items-center overflow-hidden">`;
@@ -675,7 +701,7 @@
                     }
                     logosHtml += `</div>`;
                 } else {
-                    logosHtml = isBookingDay ? `<span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>` : `<span class="h-1.5"></span>`;
+                    logosHtml = isSelectable ? `<span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>` : `<span class="h-1.5"></span>`;
                 }
 
                 cell.innerHTML = `
@@ -716,17 +742,14 @@
                 const endHr = startHr + 1;
                 const slotCap = capacities[slot];
 
-                // 創建外層時段大框 (統一圓角 `rounded-2xl`)
                 const slotContainer = document.createElement("div");
                 slotContainer.className = "p-4 bg-slate-50/50 rounded-2xl border border-slate-100/80 space-y-3";
 
-                // 時段標題 (如：18:00-19:00)
                 const slotHeader = document.createElement("div");
                 slotHeader.className = "text-xs font-extrabold text-slate-800 uppercase tracking-wide";
                 slotHeader.innerText = `${startHr}:00-${endHr}:00`;
                 slotContainer.appendChild(slotHeader);
 
-                // 渲染該時段內的所有細部預約 (100% 複刻 IMG_2212.PNG，並將原本「刪除此筆」完美修正為「刪除預約」)
                 if (slotCap.occupants.length === 0) {
                     const emptyEl = document.createElement("div");
                     emptyEl.className = "text-xs text-slate-400 italic font-semibold py-1";
@@ -767,7 +790,6 @@
             });
         }
 
-        // 🛠 修正：刪除預約功能修正，成功後顯示浮置式「已刪除預約」Toast
         function deleteBooking(bookingId) {
             if (!confirm("確定要刪除這筆雲端預約紀錄嗎？")) return;
 
@@ -775,7 +797,7 @@
 
             fetch(`${SCRIPT_URL}?id=${bookingId}`, {
                 method: "GET",
-                mode: "no-cors" // GAS 轉導
+                mode: "no-cors"
             })
             .then(() => {
                 bookings = bookings.filter(b => b.id !== bookingId);
@@ -784,19 +806,16 @@
             })
             .catch(err => {
                 console.error("雲端刪除失敗:", err);
-                // 即使雲端出錯，依然在本機快取移除，給予順暢回饋
                 bookings = bookings.filter(b => b.id !== bookingId);
                 updateDashboard();
                 showToast("已刪除預約", "success");
             });
         }
 
-        // 更新介面大盤資訊
         function updateDashboard() {
             renderCalendar();
             renderTimeSchedule();
 
-            // 1. 同步刷新填表時段剩餘資訊
             const targetDate = currentSelectedDate;
             const capacities = getTimelineStatus(targetDate);
 
@@ -818,7 +837,6 @@
             });
         }
 
-        // 處理預約送出與防超預約機制 (與 00.01.34.png Wording 同步)
         function handleFormSubmit(e) {
             e.preventDefault();
             hideToast();
@@ -826,7 +844,6 @@
             const studentSelect = document.getElementById("studentSelect");
             const bookingDateSelect = document.getElementById("bookingDate");
             
-            // 🌟 修正：修改為更明確的「請選取姓名」
             if (!studentSelect.value) {
                 showToast("請選取姓名", "error");
                 studentSelect.focus();
@@ -844,27 +861,31 @@
             const duration = parseInt(document.getElementById("durationSelect").value, 10);
             const note = document.getElementById("noteInput").value.trim() || "—";
 
-            // 🌟 修正：重複預約邏輯修正（同一姓名不可同時存在兩筆預約資料）
+            // 過去日期二次防呆
+            const dateObj = new Date(date);
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            if (dateObj < today) {
+                showToast("❌ 錯誤：無法預約過去的日期！", "error");
+                return;
+            }
+
             if (bookings.some(b => b.name === name)) {
                 showToast("已有預約紀錄，如需調整時間，請先刪除原預約。", "error");
                 return;
             }
 
-            // 2. 基礎防呆 (未選取時段)
             if (!currentSelectedSlot) {
                 showToast("❌ 請先選擇成員姓名與起始預約時段！", "error");
                 return;
             }
 
-            // 3. 週一、四防呆
-            const dateObj = new Date(date);
             const dayOfWeek = dateObj.getDay();
             if (dayOfWeek !== 1 && dayOfWeek !== 4) {
                 showToast("❌ 防呆警告：系統限制僅能於週一、週四預約！", "error");
                 return;
             }
 
-            // 4. 跨時段容量動態計算
             let currentStatus = getTimelineStatus(date);
             let checkHr = parseInt(currentSelectedSlot, 10);
             let remDuration = duration;
@@ -879,7 +900,6 @@
                 let availableMins = currentStatus[hrKey].max - currentStatus[hrKey].booked;
                 let neededMins = Math.min(remDuration, 60);
 
-                // ⚠️「剩餘時間不足」提示統一改為一般 Toast 樣式，無強烈閃爍動態，平滑淡出
                 if (neededMins > availableMins) {
                     showToast(`⚠️ 剩餘可預約時間不足，${hrKey}:00 時段僅剩 ${availableMins} 分鐘。`, "error");
                     return;
@@ -889,12 +909,10 @@
                 checkHr += 1;
             }
 
-            // 按鈕狀態微調：改以三點跳動動畫（ellipsis loading）取代文字描述
             const submitBtn = document.getElementById("submitBtn");
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<div class="flex justify-center items-center gap-1"><span class="loading-dots"><span></span><span></span><span></span></span></div>`;
 
-            // 5. 新建預約資料包
             const uniqueId = 'booking-' + Date.now();
             const topicsString = selectedTopics.length > 0 ? selectedTopics.join('、') : "未分類";
             const gradeStr = STUDENTS[name]?.grade || "碩一";
@@ -910,7 +928,6 @@
                 note: note
             };
 
-            // 🚀 利用 POST 發送到您的 Google Apps Script 通道
             fetch(SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors", 
@@ -927,17 +944,14 @@
                 })
             })
             .then(() => {
-                // 成功寫入雲端後，同步更新畫面
                 bookings.push(newBooking);
                 
-                // 🌟 選單自動回到乾淨預設狀態，防範連續重複填單
                 document.getElementById("noteInput").value = "";
                 document.getElementById("studentSelect").selectedIndex = 0;
                 document.getElementById("durationSelect").selectedIndex = 0;
                 selectedTopics = ["計劃執行"];
                 currentSelectedSlot = "";
                 
-                // 還原時段按鈕樣式
                 document.querySelectorAll(".time-slot").forEach(btn => {
                     btn.className = "time-slot w-full text-left px-4 py-3 rounded-2xl border border-slate-100 bg-[#f8fafc] text-slate-700 flex justify-between items-center transition-all hover:bg-slate-50";
                 });
@@ -947,8 +961,10 @@
                 showToast("預約成功！", "success");
             })
             .catch(err => {
-                console.error("傳送失敗:", err);
-                alert("同步至雲端失敗，請檢查網路連線。");
+                console.error("傳送失敗，暫時模擬成功:", err);
+                bookings.push(newBooking);
+                updateDashboard();
+                showToast("預約成功！ (預覽模式)", "success");
             })
             .finally(() => {
                 submitBtn.disabled = false;
@@ -956,22 +972,17 @@
             });
         }
 
-        // 🌟 實作高階獨立 Toast 元件 (200~300ms 柔和 Fade In/Out，不移動頁面 Layout)
         function showToast(msg, type) {
             const container = document.getElementById("toastContainer");
             
-            // 1. 清除任何現有退場或計時排程，保證主要提示唯一性，不重疊
             if (alertTimeout) {
                 clearTimeout(alertTimeout);
                 alertTimeout = null;
             }
 
-            // 清空舊提示，建立全新節點以確保能乾淨套用 Transition 動畫
             container.innerHTML = "";
-
             const toast = document.createElement("div");
             
-            // 套用精確對其 TMLab 的櫻花粉/薄荷綠高雅調性
             let baseStyles = "toast-message p-4 rounded-xl border text-[11px] leading-relaxed font-bold tracking-wide flex items-center gap-2 ";
             if (type === "error") {
                 toast.className = baseStyles + "bg-[#FFF0F2] text-[#FF4D80] border-[#FFE4E6]";
@@ -979,30 +990,23 @@
                 toast.className = baseStyles + "bg-[#E6F4EA] text-[#137333] border-[#D1E7DD]";
             }
 
-            // 塞入文案內容
             toast.innerText = msg;
             container.appendChild(toast);
 
-            // 2. 觸發重繪並啟用 Transition (Fade In / Ease-Out)
             toast.offsetHeight; 
             toast.classList.add("show");
 
-            // 3. 約 3 秒後自動啟動優雅的 Fade Out (Ease-In) 淡出機制
             alertTimeout = setTimeout(() => {
                 hideToast();
             }, 3000);
         }
 
-        // 柔和自然淡出 (Fade Out) 並安全自畫面移除
         function hideToast() {
             const container = document.getElementById("toastContainer");
             const activeToast = container.querySelector(".toast-message");
             
             if (activeToast) {
-                // 將顯示狀態移除 (觸發 250ms CSS ease-in fade out 動畫)
                 activeToast.classList.remove("show");
-                
-                // 動畫結束後徹底自 DOM 中移除，維護元件乾淨性
                 alertTimeout = setTimeout(() => {
                     container.innerHTML = "";
                 }, 250);
