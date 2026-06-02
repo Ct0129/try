@@ -16,19 +16,6 @@
       color: #ffffff;
       border-color: #0f172a;
     }
-    /* 下拉選單自訂樣式，確保右側Icon有足夠留白 */
-    .custom-select {
-      appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-      background-repeat: no-repeat;
-      background-position: right 1.25rem center;
-      background-size: 1rem;
-      padding-right: 3rem; /* 增加右側留白避免Icon擁擠 */
-    }
-    /* Toast 動畫 */
-    .toast-transition {
-      transition: all 0.3s ease-in-out;
-    }
   </style>
 </head>
 <body class="text-[#1c1c1e] antialiased min-h-screen">
@@ -72,19 +59,19 @@
         <form id="bookingForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
           
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-400 tracking-wider">姓名 Select Person <span class="text-rose-500">*</span></label>
+            <label class="block text-xs font-bold text-slate-400 tracking-wider">姓名 SELECT PERSON <span class="text-rose-500">*</span></label>
             <input type="text" id="nameInput" required placeholder="請輸入您的姓名 (例如: 趙怡潔)" 
                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm transition-all">
           </div>
 
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-400 tracking-wider">日期 Date <span class="text-rose-500">*</span></label>
+            <label class="block text-xs font-bold text-slate-400 tracking-wider">日期 DATE <span class="text-rose-500">*</span></label>
             <input type="date" id="dateInput" required
                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm transition-all">
           </div>
 
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-400 tracking-wider">時段 Select Time <span class="text-rose-500">*</span></label>
+            <label class="block text-xs font-bold text-slate-400 tracking-wider">時段 SELECT TIME <span class="text-rose-500">*</span></label>
             <div class="grid grid-cols-1 gap-2">
               <button type="button" type-slot="18:00 - 19:00" class="time-btn w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-left text-sm font-medium hover:bg-slate-100 transition-all flex justify-between items-center">
                 <span>18:00 - 19:00</span>
@@ -102,8 +89,8 @@
           </div>
 
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-400 tracking-wider">耗時 Duration <span class="text-rose-500">*</span></label>
-            <select id="durationInput" required class="custom-select w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm transition-all text-slate-700 font-medium">
+            <label class="block text-xs font-bold text-slate-400 tracking-wider">耗時 DURATION <span class="text-rose-500">*</span></label>
+            <select id="durationInput" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm transition-all text-slate-700 font-medium">
               <option value="20 分鐘">20 分鐘</option>
               <option value="40 分鐘">40 分鐘</option>
               <option value="60 分鐘">60 分鐘</option>
@@ -111,7 +98,7 @@
           </div>
 
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-400 tracking-wider">討論內容 (可複選) Topic</label>
+            <label class="block text-xs font-bold text-slate-400 tracking-wider">討論內容 (可複選) TOPIC</label>
             <div class="flex flex-wrap gap-2" id="topicTagsGroup">
               <button type="button" class="tag-btn px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600 hover:border-slate-300 transition-all">計劃執行</button>
               <button type="button" class="tag-btn px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600 hover:border-slate-300 transition-all">生涯</button>
@@ -124,7 +111,7 @@
           </div>
 
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-400 tracking-wider">備註 Note</label>
+            <label class="block text-xs font-bold text-slate-400 tracking-wider">備註 NOTE</label>
             <textarea id="noteInput" rows="2" placeholder="例：報 paper、口考準備 (選填)" 
                       class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm transition-all resize-none"></textarea>
           </div>
@@ -139,12 +126,13 @@
 
   </div>
 
-  <div id="alertBox" class="fixed bottom-5 right-5 z-50 transform translate-y-2 opacity-0 hidden toast-transition max-w-sm w-full rounded-xl p-4 shadow-lg flex items-start gap-3 border">
+  <div id="alertBox" class="fixed bottom-5 right-5 z-50 hidden max-w-sm w-full rounded-xl p-4 shadow-lg flex items-start gap-3 border bg-emerald-50 border-emerald-200 text-emerald-800">
     <div id="alertText" class="text-sm font-medium"></div>
+    <button onclick="document.getElementById('alertBox').classList.add('hidden')" class="ml-auto text-xs font-bold">✕</button>
   </div>
 
   <script>
-    // 您的 Google Apps Script 專屬通訊網址
+    // 您的 Google Apps Script 專屬通道網址
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkDyiK9tqLedqp7oAUA-CF4u3oUPoJX2IMd_JD7S3PrqdhTrotfpYkOyorYsoGjFpl/exec";
     
     let bookings = [];
@@ -153,11 +141,11 @@
 
     // 初始化網頁
     document.addEventListener("DOMContentLoaded", () => {
-      // 設定預設日期為今天
+      // 預設日期設定
       const today = new Date().toISOString().split('T')[0];
       document.getElementById("dateInput").value = today;
 
-      // 綁定時段點擊事件
+      // 時段點擊綁定
       document.querySelectorAll(".time-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           document.querySelectorAll(".time-btn").forEach(b => b.classList.remove("border-blue-500", "bg-blue-50/50", "ring-2", "ring-blue-500/10"));
@@ -166,7 +154,7 @@
         });
       });
 
-      // 綁定 Tag 點擊事件 (可複選)
+      // 標籤複選點擊綁定
       document.querySelectorAll(".tag-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           const topicName = btn.innerText;
@@ -180,12 +168,12 @@
         });
       });
 
-      // 載入資料
+      // 初始化從雲端載入資料並畫出月曆
       fetchBookings();
       renderCalendar();
     });
 
-    // 從 Google Sheets 抓取最新資料
+    // 從 Google 雲端載入資料
     function fetchBookings() {
       fetch(SCRIPT_URL)
         .then(res => res.json())
@@ -194,20 +182,22 @@
           updateDashboard();
         })
         .catch(err => {
-          console.error("資料載入失敗:", err);
-          showToast("無法連線至雲端資料庫，顯示本機快取資料", "error");
+          console.error("雲端讀取失敗:", err);
+          // 如果試算表還沒資料，顯示一個友善的初始化狀態
+          const container = document.getElementById("bookingList");
+          container.innerHTML = `<p class="text-slate-400 text-sm py-4 text-center">目前無雲端預約紀錄或正在初始化。</p>`;
         });
     }
 
-    // 渲染今日行程 (修改「刪除預約」文案)
+    // 更新行程列表
     function updateDashboard() {
       const container = document.getElementById("bookingList");
       if (bookings.length === 0) {
-        container.innerHTML = `<p class="text-slate-400 text-sm py-6 text-center">目前尚無預約紀錄。</p>`;
+        container.innerHTML = `<p class="text-slate-400 text-sm py-4 text-center">目前尚無預約紀錄。</p>`;
         return;
       }
 
-      // 按日期與時間排序
+      // 依時間排序
       bookings.sort((a, b) => (a.date + a.startTime).localeCompare(b.date + b.startTime));
 
       container.innerHTML = bookings.map(b => `
@@ -221,29 +211,28 @@
             <p class="text-xs text-slate-500">${b.note ? '📝 ' + b.note : '無備註描述'}</p>
           </div>
           <button onclick="deleteBooking('${b.id}')" class="text-xs font-medium text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-2.5 py-1.5 rounded-lg transition-all shrink-0">
-            刪除預約
+            刪除此筆
           </button>
         </div>
       `).join('');
     }
 
-    // 處理表單提交
+    // 處理表單送出 (核心：串接傳送至 Google 試算表)
     function handleFormSubmit(e) {
       e.preventDefault();
       
       const name = document.getElementById("nameInput").value.trim();
       const date = document.getElementById("dateInput").value;
-      const duration = document.getElementById("durationInput").value;
       const note = document.getElementById("noteInput").value.trim();
 
       if (!selectedTimeSlot) {
-        showToast("請選擇一個預約時段！", "error");
+        alert("請選擇一個預約時段！");
         return;
       }
 
       const submitBtn = document.getElementById("submitBtn");
       submitBtn.disabled = true;
-      submitBtn.innerText = "正在同步傳送至雲端...";
+      submitBtn.innerText = "正在傳送至雲端試算表...";
 
       const newBooking = {
         id: 'bk-' + Date.now(),
@@ -255,25 +244,26 @@
         note: note
       };
 
-      // 傳送到 Google Apps Script
+      // 利用 POST 發送到您的 Google Apps Script 通道
       fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors", // 避免跨網域問題
+        mode: "no-cors", 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newBooking)
       })
       .then(() => {
-        // 因為 no-cors 無法直接抓回傳 JSON，預設成功
+        // 成功寫入雲端後，同步更新畫面
         bookings.push(newBooking);
         updateDashboard();
-        showToast("預約成功！資料已寫入雲端試算表", "success");
         
-        // 【優化1】送出成功後重置表單回到預設狀態，防止重複連續連擊預約
-        resetForm();
+        // 彈出原始樣式的提示方塊
+        const box = document.getElementById("alertBox");
+        document.getElementById("alertText").innerText = "預約成功！已同步至雲端試算表。";
+        box.classList.remove("hidden");
       })
       .catch(err => {
-        console.error(err);
-        showToast("寫入失敗，請檢查網路連線", "error");
+        console.error("傳送失敗:", err);
+        alert("同步雲端失敗，請檢查網路連線。");
       })
       .finally(() => {
         submitBtn.disabled = false;
@@ -281,65 +271,18 @@
       });
     }
 
-    // 重置表單到最乾淨狀態
-    function resetForm() {
-      document.getElementById("nameInput").value = "";
-      document.getElementById("noteInput").value = "";
-      document.getElementById("durationInput").selectedIndex = 0;
-      
-      // 清空時段按鈕選取
-      selectedTimeSlot = "";
-      document.querySelectorAll(".time-btn").forEach(b => b.classList.remove("border-blue-500", "bg-blue-50/50", "ring-2", "ring-blue-500/10"));
-      
-      // 清空標籤 Tag 選取
-      selectedTopics = [];
-      document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("tag-active"));
-    }
-
-    // 【優化2】提示訊息顯示後約 3 秒自動消失，無須手動關閉
-    let toastTimeout;
-    function showToast(msg, type = "success") {
-      const box = document.getElementById("alertBox");
-      const text = document.getElementById("alertText");
-      
-      clearTimeout(toastTimeout);
-
-      text.innerText = msg;
-      box.classList.remove("hidden", "opacity-0", "translate-y-2", "bg-emerald-50", "border-emerald-200", "text-emerald-800", "bg-rose-50", "border-rose-200", "text-rose-800");
-
-      if (type === "error") {
-        box.classList.add("bg-rose-50", "border-rose-200", "text-rose-800");
-      } else {
-        box.classList.add("bg-emerald-50", "border-emerald-200", "text-emerald-800");
-      }
-
-      // 動態浮現
-      setTimeout(() => {
-        box.classList.add("opacity-100", "translate-y-0");
-      }, 50);
-
-      // 3秒後自動淡出隱藏
-      toastTimeout = setTimeout(() => {
-        box.classList.remove("opacity-100", "translate-y-0");
-        box.classList.add("opacity-0", "translate-y-2");
-        setTimeout(() => box.classList.add("hidden"), 300);
-      }, 3000);
-    }
-
-    // 刪除預約 (純前端與提示模擬，如需連動試算表刪除，可在未來擴充)
+    // 本機模擬刪除項目
     function deleteBooking(id) {
-      if(confirm("確定要刪除這筆預約紀錄嗎？")) {
+      if(confirm("確定要刪除此筆預約嗎？")) {
         bookings = bookings.filter(b => b.id !== id);
         updateDashboard();
-        showToast("已成功移除該筆預約項目", "success");
       }
     }
 
-    // 簡易渲染日曆
+    // 生成月曆
     function renderCalendar() {
       const grid = document.getElementById("calendarGrid");
       let cells = "";
-      // 生成 1 到 30 號的格子示意
       for (let i = 1; i <= 30; i++) {
         const isSelected = i === 1 ? 'bg-blue-600 text-white font-bold ring-4 ring-blue-500/20' : 'bg-slate-50 text-slate-700 hover:bg-slate-100';
         cells += `
